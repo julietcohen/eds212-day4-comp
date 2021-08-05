@@ -1,0 +1,49 @@
+---
+title: "My Fancy RMD"
+subtitle: "Some changes in my YAML"
+author: "Juliet"
+output: 
+  html_document:
+    theme: journal
+    toc: true
+    toc_float: TRUE
+    number_sections: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(prettydoc)
+```
+
+# Part 1
+
+## My First Chapter
+
+### Preface
+
+```{r}
+p <- 7
+k <- 8
+
+pk <- 7*8
+
+```
+
+# Part 2
+
+## Reptiles!
+
+### They have scales
+
+```{r}
+reptile_matrix <- matrix( data = c(1, 2, 3, 4), nrow = 2, ncol = 2, byrow = TRUE)
+reptile_matrix
+```
+
+### We Love Numbers
+
+```{r}
+reptile_vector <- c(5, 6, 7, 8, 9)
+reptile_vector
+
