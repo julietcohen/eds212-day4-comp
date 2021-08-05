@@ -1,0 +1,99 @@
+---
+title: "eds212-day4-RMD"
+author: "Juliet"
+date: "8/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Creating Matrices in R
+
+Use the 'matrix()' function to wrap a series of values (a vector) into a matrix
+
+- Use 'nrow = ' to specify number of rows
+- Use 'ncol = ' to specify the number of columns
+- use 'byrow = TRUE' to specify the matrix by rows instead of by columns
+
+```{r}
+#make a vector
+cats <- c(1, 3, 5, 8, 10, 0.2, 4, 8, 10, 11, 100)
+
+#wrap cats into a matrix
+cats_matrix <- matrix(data = cats, nrow = 4, ncol = 5, byrow = TRUE)
+
+#you're telling R tp populate a 4*5 matrix, which needs 20 values, but you only provided a few in the vector, so when R populates the matrix it poopulates as much as it can with your vector then it starts the vector over 
+#some values in the matrix that us returned has decimal X.0 and some do not, this is OK, it is because R treats the columns as variables
+#R returns a warning that your number of values in the matrix does not match the number of values you provided in your vector
+#if you're making a matrix you should know the dimensions to give R for nrow() and ncol(), you would not allow R to assess that given a dataset
+```
+
+```{r}
+# create new matrices and do some math! The matrices should be the same number of rows and columns as each other 
+
+dogs <- matrix(data = c(1 , 0, 2, 3), nrow = 2, ncol = 2, byrow = TRUE)
+
+parrots <- matrix(data = c(10, 9, 8, 9), nrow = 2, ncol = 2, byrow = TRUE)
+
+dogs + parrots
+
+#scalar multiple
+4*dogs
+
+#dot product (not the formal name) AKA matrix multiplication (the formal name)
+dogs%*%parrots
+
+
+
+```
+
+
+```{r}
+#make a leslie matrix
+
+egg_larvae_female_leslie <- matrix(data = c(0, 0, 600, 0.2, 0, 0, 0, 0.08, 0), nrow = 3, ncol = 3, byrow = TRUE)
+
+#need to specify the initial conditions
+#what is the population at each life stage at year 0?
+
+egg_larvae_female_leslie_y0 <- c(12000, 700, 500)
+
+#R treats a single vector as the same thing as a matrix with a single column and x number of rows
+
+#project the population at each life stage for year 1
+
+egg_larvae_female_leslie_y1 <- egg_larvae_female_leslie %*% egg_larvae_female_leslie_y0
+egg_larvae_female_leslie_y1
+
+#project the population at each life stage for years 2, 3, and 4!
+
+egg_larvae_female_leslie_y2 <-  egg_larvae_female_leslie %*% egg_larvae_female_leslie_y1
+egg_larvae_female_leslie_y2
+
+egg_larvae_female_leslie_y3 <- egg_larvae_female_leslie %*% egg_larvae_female_leslie_y2
+egg_larvae_female_leslie_y3
+
+egg_larvae_female_leslie_y4 <- egg_larvae_female_leslie %*% egg_larvae_female_leslie_y3
+egg_larvae_female_leslie_y4
+
+#this model has assumed that all females die after breeding, but if some percentage (60%) survived, then you would have to adjust your matrix as follows
+
+egg_larvae_female_leslie_death <- matrix(data = c(0, 0, 600, 0.2, 0, 0, 0, 0.08, 0.6), nrow = 3, ncol = 3, byrow = TRUE)
+#change the 0 to 0.6, this is the term that multiplies by the F of the previous time stamp
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
