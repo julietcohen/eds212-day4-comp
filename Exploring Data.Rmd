@@ -7,5 +7,54 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(GGally)
+library(skimr)
+library(palmerpenguins)
+```
+
+## Rapid fire tools for exploration
+
+```{r}
+# return column names of all variables
+
+names(penguins)
+
+# dimensions of data frame
+
+dim(penguins)
+
+# overall summary of the data (mean, min/max, NA's, etc.)
+
+summary(penguins)
+
+# view the first 6 lines of data
+
+head(penguins)
+
+# view the last 6 lines
+
+tail(penguins)
+
+# GGally::ggpairs(), use this full notation instead of just ggpairs() to show other collaborators which package this function is from. this fucntion shows scatter plots, histograms, etc. and at each intersection of the 2 variables (see labels on top and right) the cross section shows the graph (be careful of simpsons paradox)
+
+GGally::ggpairs(penguins)
+
+# Use skimr::skim() to see some summary info about data set
+
+skimr::skim(penguins)
+
+#plot histogram for flipper lengths and separate into different graphs by species using the facet_wrap function
+
+ggplot(data = penguins, aes(x = flipper_length_mm)) +
+  geom_histogram() +
+  facet_wrap(~species)
+
+# make a faceted histogram of penguin bill_length_mm faceted by island
+
+ggplot(data = penguins, (aes(x = bill_length_mm))) +
+  geom_histogram() +
+  facet_wrap(~island)
+
+
 ```
 
